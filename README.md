@@ -69,3 +69,38 @@ Because in 1994 in GoF people missed to identify the symetry between an Observer
 - jQuery Events
 - XMLHttpRequest
 - setInterval
+
+## Introducing the Observable
+> A Colection that arrives over time
+`Observable === Collection + Time`
+
+Observables can model
+- Events
+- Async Server Requests
+- Animations
+
+## Reactive Extensions
+- Treats events as Streams
+
+## Events to Observables
+    `fromEvent`
+    > will take a DOM Object and the name of the DOM event and adapt it to an Observable
+     
+```
+Observable.fromEvent = function (dom, eventName) {
+    // returning Observable object
+    return {
+        forEach: function(observer) {
+            let handler = (e) => observer.next(e);
+            dom.addEventListener(eventName, handler);
+            
+            //returning Subscription object
+            return {
+                dispose: function() {
+                    dom.removeEventListener(eventName, handler);
+                }
+            }
+        }
+    }
+}
+```
