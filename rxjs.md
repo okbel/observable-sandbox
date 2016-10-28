@@ -10,6 +10,7 @@ Programming with event streams. streams are sequences of events.
 
 Immutability esentials
 > These functions creates new arrays
+
 - Map
 - Filter
 > Test function
