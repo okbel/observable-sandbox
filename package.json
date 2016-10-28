@@ -1,0 +1,19 @@
+{
+  "name": "observable-sandbox",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": {
+    "url": "git@github.com:okbel/observable-sandbox.git",
+    "type": "git"
+  },
+  "author": "Belen Curcio <curciobelen@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-preset-latest": "^6.16.0",
+    "rxjs": "^5.0.0-rc.1",
+    "standard": "^8.5.0"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node index.js"
+  }
+}
