@@ -30,7 +30,7 @@ const getElementDrags = elem =>
             document.mouseMoves
                 .takeUntil(document.mouseUps))
         .concatAll();
-        
+
  getElementDrags(image)
     .forEach(pos => image.position = pos);
 ```
@@ -42,7 +42,7 @@ and consuming the collection
 > Both are collections. Iterator and the Observer pattern were symetrical.
 Different semantics. (data and error) => Completion and error
 
-###  Iterator 
+###  Iterator
 ``` javascript
 let iterator = [1, 2, 3].iterator();
 iterator.next(); // { value: 1, done: false }
@@ -71,7 +71,7 @@ Because in 1994 in GoF people missed to identify the symetry between an Observer
 - setInterval
 
 ## Introducing the Observable
-> A Colection that arrives over time
+> A Collection that arrives over time
 `Observable === Collection + Time`
 
 Observables can model
@@ -85,15 +85,15 @@ Observables can model
 ## Events to Observables
     `fromEvent`
     > will take a DOM Object and the name of the DOM event and adapt it to an Observable
-     
-```
+
+``` javascript
 Observable.fromEvent = function (dom, eventName) {
     // returning Observable object
     return {
         forEach: function(observer) {
             let handler = (e) => observer.next(e);
             dom.addEventListener(eventName, handler);
-            
+
             //returning Subscription object
             return {
                 dispose: function() {
@@ -104,3 +104,31 @@ Observable.fromEvent = function (dom, eventName) {
     }
 }
 ```
+
+## Subscription Schema
+
+``` javascript
+observable.subscription((x) => {
+    // Streaming
+  }, (err) => {
+    // On Error
+  }, () => {
+    // On Completion
+  })
+```
+
+## takeUntil
+`<sourceCollection>.takeUntil(<stopCollection>)`
+
+
+## Flatten Strategies
+
+### ConcatAll
+
+> Don't concatAll a stream that goes forever
+
+### MergeAll
+Order doesn't matter. All that matters is time.
+
+### SwitchLatest
+Switches to the latest Observable
