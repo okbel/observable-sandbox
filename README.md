@@ -139,6 +139,9 @@ Order doesn't matter. All that matters is time.
 Switches to the latest Observable.
 When a new observable comes, kills the previous that it's delayed.
 
+### ConcatMap
+Flattens a Map
+
 ## Promises
 > Promises is not the right tool/primitive to unsubscribe. Use Observable instead.
 
@@ -168,6 +171,8 @@ Array.prototype.map = function(projectionFn) {
 ## Filter Function
 > Return a new Array, takes a predicate function that returns a boolean
 
+> For performance issues this needs to be as early as possible
+
 ``` javascript
 Array.prototype.filter = function(predicateFn) {
   var results = [];
@@ -184,9 +189,13 @@ Array.prototype.filter = function(predicateFn) {
 
 
 ## ConcatAll Method
-> Flatten any two-dimentional Array
+> Flatten any two-dimentional Array. Works with Array of Arrays
 
-### ES5
+**Become confortable with multi-dimensional Arrays**
+
+__Apply `A-1` .concatAll s. Where A = levels deep__
+
+
 ``` javascript
 Array.prototype.concatAll = function() {
   var results = [];
@@ -199,20 +208,4 @@ Array.prototype.concatAll = function() {
 
   return results;
 };
-```
-
-# ES6
-
-``` javascript
-Array.prototype.concatAll = () => {
-  let results = [];
-
-  this.forEach(subArray => {
-    subArray.forEach(item => {
-      results.push(item)
-    })
-  })
-
-  return results;
-}
 ```
