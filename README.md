@@ -181,3 +181,38 @@ Array.prototype.filter = function(predicateFn) {
   return results;
 };
 ```
+
+
+## ConcatAll Method
+> Flatten any two-dimentional Array
+
+### ES5
+``` javascript
+Array.prototype.concatAll = function() {
+  var results = [];
+
+  this.forEach(function(subArray) {
+    subArray.forEach(function(item) {
+      results.push(item);
+    });
+  });
+
+  return results;
+};
+```
+
+# ES6
+
+``` javascript
+Array.prototype.concatAll = () => {
+  let results = [];
+
+  this.forEach(subArray => {
+    subArray.forEach(item => {
+      results.push(item)
+    })
+  })
+
+  return results;
+}
+```
