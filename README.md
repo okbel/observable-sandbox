@@ -147,7 +147,7 @@ When a new observable comes, kills the previous that it's delayed.
 ## Projecting Arrays
 Projecting === Map
 
-## Map function
+## Map Function
 > Returns a new Array and executes the projection function in each item
 
 ``` javascript
@@ -156,6 +156,23 @@ Array.prototype.map = function(projectionFn) {
 
   this.forEach(function(item){
     results.push(projectionFn(item));
+  });
+
+  return results;
+};
+```
+
+
+## Filter Function
+
+``` javascript
+Array.prototype.filter = function(predicateFn) {
+  var results = [];
+
+  this.forEach(function(item){
+    if (predicateFn(item)) {
+      results.push(item);
+    }
   });
 
   return results;
