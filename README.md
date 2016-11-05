@@ -144,6 +144,8 @@ When a new observable comes, kills the previous that it's delayed.
 
 **Promises cannot be canceled**
 
+# Functional Programming
+
 ## Projecting Arrays
 Projecting === Map
 
@@ -164,6 +166,7 @@ Array.prototype.map = function(projectionFn) {
 
 
 ## Filter Function
+> Return a new Array, takes a predicate function that returns a boolean
 
 ``` javascript
 Array.prototype.filter = function(predicateFn) {
