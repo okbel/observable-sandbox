@@ -2,6 +2,8 @@
 > This is an experiment and it's for learning purposes.
 I'm going to dive deep into reactive programming, javascript and the DOM. Also, I'll be documenting the journey.
 
+> _Write the answer. Declarative. Don't build a state machine_
+
 # Reactive Programming
 Programming with event streams. streams are sequences of events.
 
@@ -16,8 +18,11 @@ Immutability esentials
 > These functions creates new arrays
 
 - Map
+>
+
 - Filter
 > Test function
+
 - concatAll
 > Takes a multi-dimensional array an flatens it by one dimension. `[[1], [2,3], [], 4]].concatAll() // [1, 2, 3, 4]` Notice the `[]` collection
 
@@ -131,4 +136,28 @@ observable.subscription((x) => {
 Order doesn't matter. All that matters is time.
 
 ### SwitchLatest
-Switches to the latest Observable
+Switches to the latest Observable.
+When a new observable comes, kills the previous that it's delayed.
+
+## Promises
+> Promises is not the right tool/primitive to unsubscribe. Use Observable instead.
+
+**Promises cannot be canceled**
+
+## Projecting Arrays
+Projecting === Map
+
+## Map function
+> Returns a new Array and executes the projection function in each item
+
+``` javascript
+Array.prototype.map = function(projectionFn) {
+  var results = [];
+
+  this.forEach(function(item){
+    results.push(projectionFn(item));
+  });
+
+  return results;
+};
+```
