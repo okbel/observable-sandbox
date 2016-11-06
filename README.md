@@ -191,6 +191,8 @@ Array.prototype.filter = function(predicateFn) {
 ## ConcatAll Method
 > Flatten any two-dimentional Array. Works with Array of Arrays
 
+**Notice that map() and concatAll() are very commonly chained together.**
+
 **Become confortable with multi-dimensional Arrays**
 
 __Apply `A-1` .concatAll s. Where A = levels deep__
@@ -207,5 +209,19 @@ Array.prototype.concatAll = function() {
   });
 
   return results;
+};
+```
+
+## ConcatMap function
+> Applies the projection function to each item. The projection
+function will return a new child array. This will create a two-dimensional array.
+
+``` javascript
+Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
+	return this.
+		map(function(item) {
+      return projectionFunctionThatReturnsArray(item)
+		}).
+		concatAll();
 };
 ```
