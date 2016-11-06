@@ -153,6 +153,7 @@ Flattens a Map
 Projecting === Map
 
 ## Map Function
+**Transforms each item**
 > Returns a new Array and executes the projection function in each item
 
 ``` javascript
@@ -169,6 +170,7 @@ Array.prototype.map = function(projectionFn) {
 
 
 ## Filter Function
+**Applies test to each item**
 > Return a new Array, takes a predicate function that returns a boolean
 
 > For performance issues this needs to be as early as possible
@@ -224,4 +226,73 @@ Array.prototype.concatMap = function(projectionFunctionThatReturnsArray) {
 		}).
 		concatAll();
 };
+```
+
+
+## Reduce
+**When you need to perform an operation and look at two items at the same time**
+
+### Canonical expresion of Reduce
+
+### Javascript Implementation of reduce
+``` javascript
+[1, 2, 3].reduce(function(acc, curr) {
+  return acc + curr
+}) // 6
+```
+
+``` javascript
+[].reduce(function(acc, curr) {
+  return acc + curr
+}) // Uncaught TypeError: Reduce of empty array with no initial value
+```
+
+This Implementation cannot be used with Observables.
+
+
+### Implementation with Observables
+Reduce should be able to return an Array
+
+`{1...2....3}.reduce((acc, curr) => {.......6})`
+
+``` javascript
+Array.prototype.reduce = function(combiner, initialValue) {
+	var counter,
+		accumulatedValue;
+
+	// If the array is empty, do nothing
+	if (this.length === 0) {
+		return this;
+	}
+	else {
+		// If the user didn't pass an initial value, use the first item.
+		if (arguments.length === 1) {
+			counter = 1;
+			accumulatedValue = this[0];
+		}
+		else if (arguments.length >= 2) {
+			counter = 0;
+			accumulatedValue = initialValue;
+		}
+		else {
+			throw "Invalid arguments.";
+		}
+
+		// Loop through the array, feeding the current value and the result of
+		// the previous computation back into the combiner function until
+		// we've exhausted the entire array and are left with only one value.
+		while(counter < this.length) {
+			accumulatedValue = combiner(accumulatedValue, this[counter])
+			counter++;
+		}
+
+		return [accumulatedValue];
+	}
+};
+```
+
+### Cloning Objects
+
+``` javascript
+var clone = JSON.parse(JSON.stringify(obj));
 ```
